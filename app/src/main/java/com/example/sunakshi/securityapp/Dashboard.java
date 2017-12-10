@@ -1,9 +1,12 @@
 package com.example.sunakshi.securityapp;
 
+import android.Manifest;
 import android.content.Context;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,10 +77,18 @@ public class Dashboard extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //ActivityCompat.requestPermissions(Dashboard.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},123);
         view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"You are inside Dashboard",Toast.LENGTH_SHORT ).show();
+                //Toast.makeText(getActivity(),"You are inside Dashboard",Toast.LENGTH_SHORT ).show();
+            GPStracker g = new GPStracker(getActivity().getApplicationContext());
+                Location l = g.getLocation();
+                if(l!=null){
+                    double lat = l.getLatitude();
+                    double lon = l.getLongitude();
+                    Toast.makeText(getActivity().getApplicationContext(),"Latitude:"+lat+"\n Longitude:"+lon,Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

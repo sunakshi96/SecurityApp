@@ -1,8 +1,10 @@
 package com.example.sunakshi.securityapp;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},123);
     }
 
     @Override
@@ -93,7 +96,7 @@ public class MainActivity extends AppCompatActivity
 
         }
         if(fragment!=null)
-        {
+        { ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},123);
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction ft=fragmentManager.beginTransaction();
             ft.replace(R.id.screen_area,fragment);
